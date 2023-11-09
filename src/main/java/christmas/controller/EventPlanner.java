@@ -1,13 +1,13 @@
 package christmas.controller;
 
-import christmas.view.OutputView;
+import christmas.view.InputView;
 
 public class EventPlanner {
-    private final OutputView outputView = new OutputView();
+    private final InputView inputView = new InputView();
     public void run(){
-        getVisitDate();
+        System.out.println(getVisitDate());
     }
-    private void getVisitDate(){
-        outputView.askVisitDate();
+    private int getVisitDate(){
+        return inputView.askVisitDate();
     }
 }
