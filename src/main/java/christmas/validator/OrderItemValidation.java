@@ -8,11 +8,13 @@ import java.util.Map;
 
 public class OrderItemValidation {
     private static final int MIN_QUANTITY = 1;
+    private static final int MAX_QUANTITY = 20;
     private final List<String> menus = (List<String>) Arrays.stream(Menu.values()).map(Menu::getName).toList();
 
     public void validate(Map<String, Integer> orderInfo) {
         validateQuantity(orderInfo);
         validateMenuNames(orderInfo);
+        validateMenuAllQuantity(orderInfo);
     }
 
     private void validateQuantity(Map<String, Integer> orderInfo) {
@@ -28,6 +30,13 @@ public class OrderItemValidation {
             if (!menus.contains(orderName)) {
                 throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
             }
+        }
+    }
+
+    private void validateMenuAllQuantity(Map<String, Integer> orderInfo) {
+        boolean overMaxQuantity = orderInfo.values().stream().allMatch(quantity -> quantity <= MAX_QUANTITY);
+        if (!overMaxQuantity) {
+            throw new IllegalArgumentException(ErrorMessage.OVER_MAX_QUANTITY_ERROR.getMessage());
         }
     }
 }
