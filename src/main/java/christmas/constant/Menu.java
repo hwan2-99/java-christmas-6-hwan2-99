@@ -1,7 +1,7 @@
 package christmas.constant;
 
 public enum Menu {
-    STEAK("티스테이크", "main", 55000),
+    STEAK("티본스테이크", "main", 55000),
     BARBECUE("바비큐립", "main", 54000),
     SEAFOOD_SPAGHETTI("해산물파스타", "main", 35000),
     CHRISTMAS_SPAGHETTI("크리스마스파스타", "main", 25000),

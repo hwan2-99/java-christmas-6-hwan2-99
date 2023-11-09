@@ -13,10 +13,8 @@ public class EventPlanner {
     public void run() {
         int visitDate = getVisitDate();
         OrderItem orderItem = new OrderItem(getOrderInfo());
-        for (Entry<String, Integer> entry : orderItem.getOrderInfo().entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
         outputView.outputDateBenefitsMessage(visitDate);
+        outputView.outputOrderMenus(orderItem);
     }
 
     private int getVisitDate() {
