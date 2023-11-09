@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class OrderItemValidation {
     private static final int MIN_QUANTITY = 1;
+    private final List<String> menus = (List<String>) Arrays.stream(Menu.values()).map(Menu::getName).toList();
 
     public void validate(Map<String, Integer> orderInfo) {
         validateQuantity(orderInfo);
@@ -23,7 +24,6 @@ public class OrderItemValidation {
     }
 
     private void validateMenuNames(Map<String, Integer> orderInfo) {
-        List<String> menus = (List<String>) Arrays.stream(Menu.values()).map(Menu::getName).toList();
         for (String orderName : orderInfo.keySet()) {
             if (!menus.contains(orderName)) {
                 throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());

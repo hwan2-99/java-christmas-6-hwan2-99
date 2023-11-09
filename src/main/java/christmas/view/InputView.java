@@ -1,6 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.constant.message.ErrorMessage;
 import christmas.model.OrderItem;
 import christmas.validator.OrderItemValidation;
 import christmas.validator.VisitDateValidation;
@@ -54,6 +55,9 @@ public class InputView {
                 .collect(Collectors.toMap(
                         parts -> parts[0],
                         parts -> Integer.parseInt(parts[1]),
-                        Integer::sum));
+                        (existing, replacement) -> {
+                            throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
+                        }
+                ));
     }
 }
