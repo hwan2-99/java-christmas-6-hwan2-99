@@ -16,6 +16,7 @@ public class EventPlanner {
         int visitDate = getVisitDate();
         OrderItem orderItem = new OrderItem(getOrderInfo());
         getOrderDetails(visitDate, orderItem);
+        getBadge(visitDate,orderItem);
     }
 
     private void getOrderDetails(int visitDate, OrderItem orderItem) {
@@ -36,8 +37,15 @@ public class EventPlanner {
         int bonusMenuDiscount = discount.bonusMenuDiscount(orderItem.overEventPrice());
         outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount,
                 eventManager.isWeekDay(visitDate), bonusMenuDiscount);
-        outputView.outputAllDiscountPrice(dailyDiscount + weekDiscount + specialDiscount + bonusMenuDiscount);
+        outputView.outputAllDiscountPrice(discount.calculateDiscountPrice(visitDate,eventManager));
         return dailyDiscount + weekDiscount + specialDiscount;
+    }
+
+    private void getBadge(int visitDate, OrderItem orderItem) {
+        EventManager eventManager = new EventManager();
+        Discount discount = new Discount(orderItem);
+
+        outputView.outputEventBadge(discount.calculateDiscountPrice(visitDate,eventManager));
     }
 
     private int getVisitDate() {

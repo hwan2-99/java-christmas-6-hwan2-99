@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.constant.Badge;
 import christmas.constant.Menu;
 import christmas.constant.Price;
 import christmas.constant.message.OutputMessage;
@@ -115,5 +116,22 @@ public class OutputView {
     public void outputExpectedPrice(int price, int discount) {
         System.out.println("\n" + OutputMessage.EXPECTED_PRICE.getMessage());
         System.out.println(numberFormat.format(price + discount) + WON);
+    }
+
+    public void outputEventBadge(int price) {
+        System.out.println("\n" + OutputMessage.DECEMBER_BADGE.getMessage());
+        int badgeJudgement = Math.abs(price);
+        if (badgeJudgement < Badge.STAR.getPrice()) {
+            System.out.println(NONE);
+        }
+        if (Badge.STAR.getPrice() < badgeJudgement && badgeJudgement < Badge.TREE.getPrice()) {
+            System.out.println(Badge.STAR.getName());
+        }
+        if (Badge.TREE.getPrice() < badgeJudgement && badgeJudgement < Badge.SANTA.getPrice()) {
+            System.out.println(Badge.TREE.getName());
+        }
+        if (Badge.SANTA.getPrice() <= badgeJudgement) {
+            System.out.println(Badge.SANTA.getName());
+        }
     }
 }

@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 
 public class OrderItem {
     private final Map<String, Integer> orderInfo;
-    private int orderPrice;
 
     public OrderItem(Map<String, Integer> orderInfo) {
         this.orderInfo = orderInfo;
