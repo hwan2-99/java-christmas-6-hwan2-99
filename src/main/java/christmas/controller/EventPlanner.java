@@ -22,9 +22,9 @@ public class EventPlanner {
     private void getOrderDetails(int visitDate, OrderItem orderItem) {
         outputView.outputDateBenefitsMessage(visitDate);
         outputView.outputOrderMenus(orderItem);
-        outputView.outputOrderPrice(orderItem.getOrderPrice());
+        outputView.outputOrderPrice(orderItem.calculateOrderPrice());
         outputView.outputBonusMenu(orderItem.overEventPrice());
-        outputView.outputExpectedPrice(orderItem.getOrderPrice(), initDiscount(visitDate, orderItem));
+        outputView.outputExpectedPrice(orderItem.calculateOrderPrice(), initDiscount(visitDate, orderItem));
     }
 
     private int initDiscount(int visitDate, OrderItem orderItem) {

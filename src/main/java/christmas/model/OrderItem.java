@@ -16,7 +16,7 @@ public class OrderItem {
         return orderInfo;
     }
 
-    public int getOrderPrice() {
+    public int calculateOrderPrice() {
         int orderPrice = Price.NONE.getPrice();
 
         for (Entry<String, Integer> entry : orderInfo.entrySet()) {
@@ -31,6 +31,6 @@ public class OrderItem {
     }
 
     public boolean overEventPrice() {
-        return getOrderPrice() >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
+        return calculateOrderPrice() >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
     }
 }
