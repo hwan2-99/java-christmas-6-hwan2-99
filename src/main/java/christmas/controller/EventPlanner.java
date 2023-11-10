@@ -21,6 +21,7 @@ public class EventPlanner {
         outputView.outputBonusMenu(orderItem.priceOverEventPrice());
         EventManager eventManager = new EventManager();
         Discount discount = new Discount(orderItem);
+        outputView.outputDailyDiscount(discount.dailyDiscount(eventManager.getCalender().get(visitDate)));
         outputWeekDiscountList(discount.weekDiscount(eventManager.isWeekDay(visitDate)),eventManager.isWeekDay(visitDate));
         outputView.outputSpecialDiscountList(discount.specialDiscount(eventManager.isSpecialDay(visitDate)));
     }

@@ -52,30 +52,28 @@ public class OutputView {
         }
         System.out.println(NONE);
     }
+    public void outputDailyDiscount(int discount){
+        System.out.println("\n" + DISCOUNT_LIST);
+        String message = String.format(DAILY_DISCOUNT,numberFormat.format(discount));
+        System.out.println(message);
+    }
 
     public void outputWeekDayDiscountList(int discount) {
-
-        System.out.println("\n" + DISCOUNT_LIST);
         if (discount == NONE_DISCOUNT){
-            System.out.println(NONE);
             return;
         }
         String message = String.format(WEEK_DAY_DISCOUNT,numberFormat.format(discount));
         System.out.println(message);
     }
     public void outputWeekendDiscountList(int discount) {
-        System.out.println("\n" + DISCOUNT_LIST);
         if (discount == NONE_DISCOUNT){
-            System.out.println(NONE);
             return;
         }
         String message = String.format(WEEKEND_DISCOUNT,numberFormat.format(discount));
         System.out.println(message);
     }
     public void outputSpecialDiscountList(int discount){
-        System.out.println("\n" + DISCOUNT_LIST);
         if (discount == NONE_DISCOUNT){
-            System.out.println(NONE);
             return;
         }
         String message = String.format(SPECIAL_DISCOUNT,numberFormat.format(discount));

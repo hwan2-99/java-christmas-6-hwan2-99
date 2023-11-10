@@ -9,11 +9,14 @@ public class Discount {
     private static final String DESSERT = "dessert";
     private static final String MAIN = "main";
     private static final int MINUS = -1;
-    private int specialDiscountPrice;
     private final OrderItem orderItem;
 
     public Discount(OrderItem orderItem) {
         this.orderItem = orderItem;
+    }
+
+    public int dailyDiscount(int price) {
+        return price * MINUS;
     }
 
     public int weekDiscount(boolean isWeekDay) {
