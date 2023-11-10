@@ -17,7 +17,7 @@ public class EventManager {
 
     public EventManager() {
         for (int i = FIRST_DAY; i <= CHRISTMAS_DAY; i++) {
-            calender.put(i, Price.INITIAL_DISCOUNT_PRICE.getPrice() + Price.ADDITIONAL_DISCOUNT_PRICE.getPrice() * i);
+            calender.put(i, Price.INITIAL_DISCOUNT_PRICE.getPrice() + Price.ADDITIONAL_DISCOUNT_PRICE.getPrice() * (i-1));
         }
         for (int i = CHRISTMAS_DAY; i <= LAST_DAY; i++) {
             calender.put(i, 0);

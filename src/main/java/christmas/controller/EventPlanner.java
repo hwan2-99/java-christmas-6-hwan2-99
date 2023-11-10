@@ -34,8 +34,9 @@ public class EventPlanner {
         int dailyDiscount = discount.dailyDiscount(eventManager.getCalender().get(visitDate));
         int weekDiscount = discount.weekDiscount(eventManager.isWeekDay(visitDate));
         int specialDiscount = discount.specialDiscount(eventManager.isSpecialDay(visitDate));
+        int bonusMenuDiscount = discount.bonusMenuDiscount(orderItem.overEventPrice());
 
-        outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount, eventManager.isWeekDay(visitDate));
+        outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount, eventManager.isWeekDay(visitDate),bonusMenuDiscount);
     }
 
     private int getVisitDate() {

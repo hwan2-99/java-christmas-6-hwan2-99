@@ -33,7 +33,7 @@ public class Discount {
         if (isSpecialDay) {
             return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
         }
-        return 0;
+        return Price.NONE.getPrice();
     }
 
     private int weekDayEventDiscount() {
@@ -43,7 +43,7 @@ public class Discount {
         for (Entry<String, Integer> entry : orderInfo.entrySet()) {
             String menuName = entry.getKey();
             Menu menu = Menu.getMenuByName(menuName);
-            if (menu.getType() == DESSERT) {
+            if (DESSERT.equals(menu.getType())) {
                 menuCount++;
             }
         }
@@ -57,10 +57,16 @@ public class Discount {
         for (Entry<String, Integer> entry : orderInfo.entrySet()) {
             String menuName = entry.getKey();
             Menu menu = Menu.getMenuByName(menuName);
-            if (menu.getType() == MAIN) {
+            if (MAIN.equals(menu.getType())) {
                 menuCount++;
             }
         }
         return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
+    }
+    public int bonusMenuDiscount(boolean isOverEventPrice){
+        if (isOverEventPrice){
+            return Menu.CHAMPAGNE.getPrice() * MINUS;
+        }
+        return Price.NONE.getPrice();
     }
 }
