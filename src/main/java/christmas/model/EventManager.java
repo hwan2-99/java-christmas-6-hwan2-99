@@ -31,7 +31,6 @@ public class EventManager {
     public boolean isWeekDay(int visitDate) {
         LocalDate visitDay = LocalDate.of(YEAR, DECEMBER, visitDate);
         DayOfWeek dayOfWeek = visitDay.getDayOfWeek();
-
         return dayOfWeek != DayOfWeek.FRIDAY && dayOfWeek != DayOfWeek.SATURDAY;
     }
 

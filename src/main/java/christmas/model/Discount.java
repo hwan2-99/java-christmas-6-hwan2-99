@@ -20,20 +20,10 @@ public class Discount {
     }
 
     public int weekDiscount(boolean isWeekDay) {
-        int weekDiscountPrice;
         if (isWeekDay) {
-            weekDiscountPrice = weekDayEventDiscount();
-            return weekDiscountPrice;
+            return weekDayEventDiscount();
         }
-        weekDiscountPrice = weekendEventDiscount();
-        return weekDiscountPrice;
-    }
-
-    public int specialDiscount(boolean isSpecialDay) {
-        if (isSpecialDay) {
-            return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
-        }
-        return Price.NONE.getPrice();
+        return weekendEventDiscount();
     }
 
     private int weekDayEventDiscount() {
@@ -42,9 +32,10 @@ public class Discount {
 
         for (Entry<String, Integer> entry : orderInfo.entrySet()) {
             String menuName = entry.getKey();
+            int quantity = entry.getValue();
             Menu menu = Menu.getMenuByName(menuName);
-            if (DESSERT.equals(menu.getType())) {
-                menuCount++;
+            if (menu.getType() == DESSERT) {
+                menuCount += quantity;
             }
         }
         return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
@@ -56,12 +47,21 @@ public class Discount {
 
         for (Entry<String, Integer> entry : orderInfo.entrySet()) {
             String menuName = entry.getKey();
+            int quantity = entry.getValue();
             Menu menu = Menu.getMenuByName(menuName);
-            if (MAIN.equals(menu.getType())) {
-                menuCount++;
+            if (menu.getType() == MAIN) {
+                menuCount += quantity;
             }
         }
+        System.out.println(menuCount);
         return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
+    }
+
+    public int specialDiscount(boolean isSpecialDay) {
+        if (isSpecialDay) {
+            return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
+        }
+        return Price.NONE.getPrice();
     }
     public int bonusMenuDiscount(boolean isOverEventPrice){
         if (isOverEventPrice){
