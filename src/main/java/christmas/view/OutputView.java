@@ -2,38 +2,27 @@ package christmas.view;
 
 import christmas.constant.Menu;
 import christmas.constant.Price;
+import christmas.constant.message.OutputMessage;
 import christmas.model.OrderItem;
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Map.Entry;
 
 public class OutputView {
-    private static final String PRINT_EVENT_BENEFITS = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
-    private static final String ORDER_LIST = "<주문 메뉴>";
-    private static final String ORDER_PRICE_BEFORE_DISCOUNT = "<할인 전 총주문 금액>";
-    private static final String BONUS_MENU = "<증정 메뉴>";
-    private static final String DISCOUNT_LIST = "<혜택 내역>";
-    private static final String DAILY_DISCOUNT = "크리스마스 디데이 할인: %s원";
-    private static final String WEEK_DAY_DISCOUNT = "평일 할인: %s원";
-    private static final String WEEKEND_DISCOUNT = "주말 할인: %s원";
-    private static final String SPECIAL_DISCOUNT = "특별 할인: %s원";
-    private static final String BONUS_MENU_DISCOUNT = "증정 이벤트: %s원";
     private static final int BONUS_COUNT = 1;
     private static final String COUNT = "개";
     private static final String NONE = "없음";
     private static final String WON = "원";
     NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 
-
     public void outputDateBenefitsMessage(int visitDate) {
-        String message = String.format(PRINT_EVENT_BENEFITS, visitDate);
+        String message = String.format(OutputMessage.PRINT_EVENT_BENEFITS.getMessage(), visitDate);
 
         System.out.println(message);
     }
 
     public void outputOrderMenus(OrderItem orderItem) {
-        System.out.println("\n" + ORDER_LIST);
+        System.out.println("\n" + OutputMessage.ORDER_LIST.getMessage());
         for (Entry<String, Integer> entry : orderItem.getOrderInfo().entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue() + COUNT);
         }
@@ -41,12 +30,12 @@ public class OutputView {
 
     public void outputOrderPrice(int orderPrice) {
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        System.out.println("\n" + ORDER_PRICE_BEFORE_DISCOUNT);
+        System.out.println("\n" + OutputMessage.ORDER_PRICE_BEFORE_DISCOUNT.getMessage());
         System.out.println(numberFormat.format(orderPrice) + WON);
     }
 
     public void outputBonusMenu(boolean overEventPrice) {
-        System.out.println("\n" + BONUS_MENU);
+        System.out.println("\n" + OutputMessage.BONUS_MENU.getMessage());
         if (overEventPrice) {
             System.out.println(Menu.CHAMPAGNE.getName() + " " + BONUS_COUNT + COUNT);
             return;
@@ -56,7 +45,7 @@ public class OutputView {
 
     public void outputDiscountDetails(int dailyDiscount, int weekDiscount, int specialDiscount, boolean isWeekDay,
                                       int bonusMenuDiscount) {
-        System.out.println("\n" + DISCOUNT_LIST);
+        System.out.println("\n" + OutputMessage.DISCOUNT_LIST.getMessage());
         boolean hasDiscount = dailyDiscount != Price.NONE.getPrice() || weekDiscount != Price.NONE.getPrice()
                 || specialDiscount != Price.NONE.getPrice();
 
@@ -71,7 +60,7 @@ public class OutputView {
     }
 
     public void outputDailyDiscount(int discount) {
-        String message = String.format(DAILY_DISCOUNT, numberFormat.format(discount));
+        String message = String.format(OutputMessage.DAILY_DISCOUNT.getMessage(), numberFormat.format(discount));
         System.out.println(message);
     }
 
@@ -87,7 +76,7 @@ public class OutputView {
         if (discount == Price.NONE.getPrice()) {
             return;
         }
-        String message = String.format(WEEK_DAY_DISCOUNT, numberFormat.format(discount));
+        String message = String.format(OutputMessage.WEEK_DAY_DISCOUNT.getMessage(), numberFormat.format(discount));
         System.out.println(message);
     }
 
@@ -95,7 +84,7 @@ public class OutputView {
         if (discount == Price.NONE.getPrice()) {
             return;
         }
-        String message = String.format(WEEKEND_DISCOUNT, numberFormat.format(discount));
+        String message = String.format(OutputMessage.WEEKEND_DISCOUNT.getMessage(), numberFormat.format(discount));
         System.out.println(message);
     }
 
@@ -103,7 +92,7 @@ public class OutputView {
         if (discount == Price.NONE.getPrice()) {
             return;
         }
-        String message = String.format(SPECIAL_DISCOUNT, numberFormat.format(discount));
+        String message = String.format(OutputMessage.SPECIAL_DISCOUNT.getMessage(), numberFormat.format(discount));
         System.out.println(message);
     }
 
@@ -111,11 +100,15 @@ public class OutputView {
         if (discount == Price.NONE.getPrice()) {
             return;
         }
-        String message = String.format(BONUS_MENU_DISCOUNT, numberFormat.format(discount));
+        String message = String.format(OutputMessage.BONUS_MENU_DISCOUNT.getMessage(), numberFormat.format(discount));
         System.out.println(message);
     }
 
     public void outputNoneDiscount() {
         System.out.println(NONE);
+    }
+
+    public void outputAllDiscountPrice(int discount){
+        System.out.println();
     }
 }
