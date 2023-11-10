@@ -34,9 +34,10 @@ public class OrderItemValidation {
     }
 
     private void validateMenuAllQuantity(Map<String, Integer> orderInfo) {
-        boolean overMaxQuantity = orderInfo.values().stream().allMatch(quantity -> quantity <= MAX_QUANTITY);
-        if (!overMaxQuantity) {
+        int totalQuantity = orderInfo.values().stream().mapToInt(Integer::intValue).sum();
+        if (totalQuantity > MAX_QUANTITY) {
             throw new IllegalArgumentException(ErrorMessage.OVER_MAX_QUANTITY_ERROR.getMessage());
         }
     }
+
 }
