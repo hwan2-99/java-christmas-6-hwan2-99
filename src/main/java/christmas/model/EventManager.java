@@ -28,10 +28,6 @@ public class EventManager {
         return calender;
     }
 
-    public boolean isEndEvent(int visitDate) {
-        return visitDate > CHRISTMAS_DAY;
-    }
-
     public boolean isWeekDay(int visitDate) {
         LocalDate visitDay = LocalDate.of(YEAR, DECEMBER, visitDate);
         DayOfWeek dayOfWeek = visitDay.getDayOfWeek();
