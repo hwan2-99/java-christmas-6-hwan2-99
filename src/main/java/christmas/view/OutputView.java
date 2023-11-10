@@ -29,7 +29,6 @@ public class OutputView {
     }
 
     public void outputOrderPrice(int orderPrice) {
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         System.out.println("\n" + OutputMessage.ORDER_PRICE_BEFORE_DISCOUNT.getMessage());
         System.out.println(numberFormat.format(orderPrice) + WON);
     }
@@ -108,7 +107,8 @@ public class OutputView {
         System.out.println(NONE);
     }
 
-    public void outputAllDiscountPrice(int discount){
-        System.out.println();
+    public void outputAllDiscountPrice(int discount) {
+        System.out.println("\n" + OutputMessage.ALL_DISCOUNT_PRICE.getMessage());
+        System.out.println(numberFormat.format(discount) + WON);
     }
 }

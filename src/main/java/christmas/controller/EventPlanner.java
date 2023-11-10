@@ -16,18 +16,18 @@ public class EventPlanner {
     public void run() {
         int visitDate = getVisitDate();
         OrderItem orderItem = new OrderItem(getOrderInfo());
-        outputOrderDetails(visitDate, orderItem);
-        initDiscount(visitDate,orderItem);
+        getOrderDetails(visitDate, orderItem);
+        getAllDiscount(initDiscount(visitDate, orderItem));
     }
 
-    private void outputOrderDetails(int visitDate, OrderItem orderItem) {
+    private void getOrderDetails(int visitDate, OrderItem orderItem) {
         outputView.outputDateBenefitsMessage(visitDate);
         outputView.outputOrderMenus(orderItem);
         outputView.outputOrderPrice(orderItem.getOrderPrice());
         outputView.outputBonusMenu(orderItem.overEventPrice());
     }
 
-    private void initDiscount(int visitDate, OrderItem orderItem) {
+    private int initDiscount(int visitDate, OrderItem orderItem) {
         EventManager eventManager = new EventManager();
         Discount discount = new Discount(orderItem);
 
@@ -36,9 +36,13 @@ public class EventPlanner {
         int specialDiscount = discount.specialDiscount(eventManager.isSpecialDay(visitDate));
         int bonusMenuDiscount = discount.bonusMenuDiscount(orderItem.overEventPrice());
 
-        outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount, eventManager.isWeekDay(visitDate),bonusMenuDiscount);
+        outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount,
+                eventManager.isWeekDay(visitDate), bonusMenuDiscount);
+        return dailyDiscount + weekDiscount + specialDiscount + bonusMenuDiscount;
     }
-
+    private void getAllDiscount(int discount){
+        outputView.outputAllDiscountPrice(discount);
+    }
     private int getVisitDate() {
         return inputView.askVisitDate();
     }
