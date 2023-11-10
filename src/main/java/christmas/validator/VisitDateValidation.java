@@ -12,7 +12,7 @@ public class VisitDateValidation {
         try {
             Integer.parseInt(inputValue);
         }catch (NumberFormatException e){
-            throw new IllegalArgumentException(ErrorMessage.INCORRECT_INPUT_ERROR.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.OVER_DATE_RANGE_ERROR.getMessage());
         }
     }
     private void validateDateRange(String inputValue){
