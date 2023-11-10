@@ -39,5 +39,4 @@ public class OrderItemValidation {
             throw new IllegalArgumentException(ErrorMessage.OVER_MAX_QUANTITY_ERROR.getMessage());
         }
     }
-
 }

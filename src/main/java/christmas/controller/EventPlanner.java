@@ -1,5 +1,7 @@
 package christmas.controller;
 
+import christmas.model.Discount;
+import christmas.model.EventManager;
 import christmas.model.OrderItem;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -17,6 +19,10 @@ public class EventPlanner {
         outputView.outputOrderMenus(orderItem);
         outputView.outputOrderPrice(orderItem.getOrderPrice());
         outputView.outputBonusMenu(orderItem.priceOverEventPrice());
+        EventManager eventManager = new EventManager();
+        Discount discount = new Discount(orderItem);
+
+        outputView.outputDiscountList(discount.calculateDiscount(eventManager.isWeekDay(visitDate)));
     }
 
     private int getVisitDate() {
