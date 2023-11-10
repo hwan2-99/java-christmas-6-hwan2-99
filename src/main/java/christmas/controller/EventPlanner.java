@@ -15,6 +15,7 @@ public class EventPlanner {
         OrderItem orderItem = new OrderItem(getOrderInfo());
         outputView.outputDateBenefitsMessage(visitDate);
         outputView.outputOrderMenus(orderItem);
+        outputView.outputOrderPrice(orderItem.getOrderPrice());
     }
 
     private int getVisitDate() {
