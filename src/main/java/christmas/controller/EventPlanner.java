@@ -21,8 +21,8 @@ public class EventPlanner {
         outputView.outputBonusMenu(orderItem.priceOverEventPrice());
         EventManager eventManager = new EventManager();
         Discount discount = new Discount(orderItem);
+        outputWeekDiscountList(discount.weekDiscount(eventManager.isWeekDay(visitDate)),eventManager.isWeekDay(visitDate));
 
-        outputView.outputDiscountList(discount.calculateDiscount(eventManager.isWeekDay(visitDate)));
     }
 
     private int getVisitDate() {
@@ -31,5 +31,12 @@ public class EventPlanner {
 
     private Map<String, Integer> getOrderInfo() {
         return inputView.askOrderMenus();
+    }
+    private void outputWeekDiscountList(int discount,boolean isWeekDay){
+        if (isWeekDay){
+            outputView.outputWeekDayDiscountList(discount);
+            return;
+        }
+        outputView.outputWeekendDiscountList(discount);
     }
 }

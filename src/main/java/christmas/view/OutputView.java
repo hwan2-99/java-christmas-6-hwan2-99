@@ -15,11 +15,14 @@ public class OutputView {
     private static final String DISCOUNT_LIST = "<혜택 내역>";
     private static final String DAILY_DISCOUNT= "크리스마스 디데이 할인: %s원";
     private static final String WEEK_DAY_DISCOUNT= "평일 할인: %s원";
+    private static final String WEEKEND_DISCOUNT= "주말 할인: %s원";
     private static final int BONUS_COUNT = 1;
     private static final int NONE_DISCOUNT = 0;
     private static final String COUNT = "개";
     private static final String NONE = "없음";
     private static final String WON = "원";
+    NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+
 
     public void outputDateBenefitsMessage(int visitDate) {
         String message = String.format(PRINT_EVENT_BENEFITS, visitDate);
@@ -49,14 +52,23 @@ public class OutputView {
         System.out.println(NONE);
     }
 
-    public void outputDiscountList(int discount) {
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+    public void outputWeekDayDiscountList(int discount) {
+
         System.out.println("\n" + DISCOUNT_LIST);
         if (discount == NONE_DISCOUNT){
             System.out.println(NONE);
             return;
         }
-        String message = String.format(DAILY_DISCOUNT,numberFormat.format(discount));
+        String message = String.format(WEEK_DAY_DISCOUNT,numberFormat.format(discount));
+        System.out.println(message);
+    }
+    public void outputWeekendDiscountList(int discount) {
+        System.out.println("\n" + DISCOUNT_LIST);
+        if (discount == NONE_DISCOUNT){
+            System.out.println(NONE);
+            return;
+        }
+        String message = String.format(WEEKEND_DISCOUNT,numberFormat.format(discount));
         System.out.println(message);
     }
 }
