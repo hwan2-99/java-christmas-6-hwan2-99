@@ -22,7 +22,7 @@ public class EventPlanner {
         EventManager eventManager = new EventManager();
         Discount discount = new Discount(orderItem);
         outputWeekDiscountList(discount.weekDiscount(eventManager.isWeekDay(visitDate)),eventManager.isWeekDay(visitDate));
-
+        outputView.outputSpecialDiscountList(discount.specialDiscount(eventManager.isSpecialDay(visitDate)));
     }
 
     private int getVisitDate() {

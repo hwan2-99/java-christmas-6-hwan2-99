@@ -16,6 +16,7 @@ public class OutputView {
     private static final String DAILY_DISCOUNT= "크리스마스 디데이 할인: %s원";
     private static final String WEEK_DAY_DISCOUNT= "평일 할인: %s원";
     private static final String WEEKEND_DISCOUNT= "주말 할인: %s원";
+    private static final String SPECIAL_DISCOUNT= "특별 할인: %s원";
     private static final int BONUS_COUNT = 1;
     private static final int NONE_DISCOUNT = 0;
     private static final String COUNT = "개";
@@ -69,6 +70,15 @@ public class OutputView {
             return;
         }
         String message = String.format(WEEKEND_DISCOUNT,numberFormat.format(discount));
+        System.out.println(message);
+    }
+    public void outputSpecialDiscountList(int discount){
+        System.out.println("\n" + DISCOUNT_LIST);
+        if (discount == NONE_DISCOUNT){
+            System.out.println(NONE);
+            return;
+        }
+        String message = String.format(SPECIAL_DISCOUNT,numberFormat.format(discount));
         System.out.println(message);
     }
 }

@@ -9,7 +9,7 @@ public class Discount {
     private static final String DESSERT = "dessert";
     private static final String MAIN = "main";
     private static final int MINUS = -1;
-    private int discountPrice;
+    private int specialDiscountPrice;
     private final OrderItem orderItem;
 
     public Discount(OrderItem orderItem) {
@@ -17,12 +17,20 @@ public class Discount {
     }
 
     public int weekDiscount(boolean isWeekDay) {
-        if(isWeekDay){
-            discountPrice = weekDayEventDiscount();
-            return discountPrice;
+        int weekDiscountPrice;
+        if (isWeekDay) {
+            weekDiscountPrice = weekDayEventDiscount();
+            return weekDiscountPrice;
         }
-        discountPrice = weekendEventDiscount();
-        return discountPrice;
+        weekDiscountPrice = weekendEventDiscount();
+        return weekDiscountPrice;
+    }
+
+    public int specialDiscount(boolean isSpecialDay) {
+        if (isSpecialDay) {
+            return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
+        }
+        return 0;
     }
 
     private int weekDayEventDiscount() {
@@ -38,6 +46,7 @@ public class Discount {
         }
         return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
     }
+
     private int weekendEventDiscount() {
         int menuCount = 0;
         Map<String, Integer> orderInfo = orderItem.getOrderInfo();
