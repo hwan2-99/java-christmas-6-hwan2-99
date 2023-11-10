@@ -28,7 +28,7 @@ public class OrderItem {
         return orderPrice;
     }
 
-    public boolean priceOverEventPrice() {
+    public boolean overEventPrice() {
         return orderPrice >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
     }
 }

@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.constant.Menu;
+import christmas.constant.Price;
 import christmas.model.OrderItem;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -13,12 +14,11 @@ public class OutputView {
     private static final String ORDER_PRICE_BEFORE_DISCOUNT = "<할인 전 총주문 금액>";
     private static final String BONUS_MENU = "<증정 메뉴>";
     private static final String DISCOUNT_LIST = "<혜택 내역>";
-    private static final String DAILY_DISCOUNT= "크리스마스 디데이 할인: %s원";
-    private static final String WEEK_DAY_DISCOUNT= "평일 할인: %s원";
-    private static final String WEEKEND_DISCOUNT= "주말 할인: %s원";
-    private static final String SPECIAL_DISCOUNT= "특별 할인: %s원";
+    private static final String DAILY_DISCOUNT = "크리스마스 디데이 할인: %s원";
+    private static final String WEEK_DAY_DISCOUNT = "평일 할인: %s원";
+    private static final String WEEKEND_DISCOUNT = "주말 할인: %s원";
+    private static final String SPECIAL_DISCOUNT = "특별 할인: %s원";
     private static final int BONUS_COUNT = 1;
-    private static final int NONE_DISCOUNT = 0;
     private static final String COUNT = "개";
     private static final String NONE = "없음";
     private static final String WON = "원";
@@ -52,31 +52,60 @@ public class OutputView {
         }
         System.out.println(NONE);
     }
-    public void outputDailyDiscount(int discount){
+
+    public void outputDiscountDetails(int dailyDiscount, int weekDiscount, int specialDiscount, boolean isWeekDay) {
         System.out.println("\n" + DISCOUNT_LIST);
-        String message = String.format(DAILY_DISCOUNT,numberFormat.format(discount));
+        boolean hasDiscount = dailyDiscount != Price.NONE.getPrice() || weekDiscount != Price.NONE.getPrice()
+                || specialDiscount != Price.NONE.getPrice();
+
+        if (hasDiscount) {
+            outputDailyDiscount(dailyDiscount);
+            outputWeekDiscountList(weekDiscount, isWeekDay);
+            outputSpecialDiscountList(specialDiscount);
+            return;
+        }
+        outputNoneDiscount();
+    }
+
+    public void outputDailyDiscount(int discount) {
+        String message = String.format(DAILY_DISCOUNT, numberFormat.format(discount));
         System.out.println(message);
     }
 
+    private void outputWeekDiscountList(int discount, boolean isWeekDay) {
+        if (isWeekDay) {
+            outputWeekDayDiscountList(discount);
+            return;
+        }
+        outputWeekendDiscountList(discount);
+
+    }
+
     public void outputWeekDayDiscountList(int discount) {
-        if (discount == NONE_DISCOUNT){
+        if (discount == Price.NONE.getPrice()) {
             return;
         }
-        String message = String.format(WEEK_DAY_DISCOUNT,numberFormat.format(discount));
+        String message = String.format(WEEK_DAY_DISCOUNT, numberFormat.format(discount));
         System.out.println(message);
     }
+
     public void outputWeekendDiscountList(int discount) {
-        if (discount == NONE_DISCOUNT){
+        if (discount == Price.NONE.getPrice()) {
             return;
         }
-        String message = String.format(WEEKEND_DISCOUNT,numberFormat.format(discount));
+        String message = String.format(WEEKEND_DISCOUNT, numberFormat.format(discount));
         System.out.println(message);
     }
-    public void outputSpecialDiscountList(int discount){
-        if (discount == NONE_DISCOUNT){
+
+    public void outputSpecialDiscountList(int discount) {
+        if (discount == Price.NONE.getPrice()) {
             return;
         }
-        String message = String.format(SPECIAL_DISCOUNT,numberFormat.format(discount));
+        String message = String.format(SPECIAL_DISCOUNT, numberFormat.format(discount));
         System.out.println(message);
+    }
+
+    public void outputNoneDiscount() {
+        System.out.println(NONE);
     }
 }

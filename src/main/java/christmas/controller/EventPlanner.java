@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.constant.Price;
 import christmas.model.Discount;
 import christmas.model.EventManager;
 import christmas.model.OrderItem;
@@ -15,15 +16,26 @@ public class EventPlanner {
     public void run() {
         int visitDate = getVisitDate();
         OrderItem orderItem = new OrderItem(getOrderInfo());
+        outputOrderDetails(visitDate, orderItem);
+        initDiscount(visitDate,orderItem);
+    }
+
+    private void outputOrderDetails(int visitDate, OrderItem orderItem) {
         outputView.outputDateBenefitsMessage(visitDate);
         outputView.outputOrderMenus(orderItem);
         outputView.outputOrderPrice(orderItem.getOrderPrice());
-        outputView.outputBonusMenu(orderItem.priceOverEventPrice());
+        outputView.outputBonusMenu(orderItem.overEventPrice());
+    }
+
+    private void initDiscount(int visitDate, OrderItem orderItem) {
         EventManager eventManager = new EventManager();
         Discount discount = new Discount(orderItem);
-        outputView.outputDailyDiscount(discount.dailyDiscount(eventManager.getCalender().get(visitDate)));
-        outputWeekDiscountList(discount.weekDiscount(eventManager.isWeekDay(visitDate)),eventManager.isWeekDay(visitDate));
-        outputView.outputSpecialDiscountList(discount.specialDiscount(eventManager.isSpecialDay(visitDate)));
+
+        int dailyDiscount = discount.dailyDiscount(eventManager.getCalender().get(visitDate));
+        int weekDiscount = discount.weekDiscount(eventManager.isWeekDay(visitDate));
+        int specialDiscount = discount.specialDiscount(eventManager.isSpecialDay(visitDate));
+
+        outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount, eventManager.isWeekDay(visitDate));
     }
 
     private int getVisitDate() {
@@ -33,11 +45,7 @@ public class EventPlanner {
     private Map<String, Integer> getOrderInfo() {
         return inputView.askOrderMenus();
     }
-    private void outputWeekDiscountList(int discount,boolean isWeekDay){
-        if (isWeekDay){
-            outputView.outputWeekDayDiscountList(discount);
-            return;
-        }
-        outputView.outputWeekendDiscountList(discount);
-    }
+
 }
+
+

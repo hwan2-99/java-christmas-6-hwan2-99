@@ -6,7 +6,7 @@ public enum Menu {
     SEAFOOD_SPAGHETTI("해산물파스타", "main", 35000),
     CHRISTMAS_SPAGHETTI("크리스마스파스타", "main", 25000),
     MUSHROOM_SOUP("양송이수프", "appetizer", 6000),
-    TAPAS("탸파스", "appetizer", 5500),
+    TAPAS("타파스", "appetizer", 5500),
     SALAD("시저샐러드", "appetizer", 8000),
     OKE("제로콜라", "beverage", 3000),
     WINE("레드와인", "beverage", 60000),
