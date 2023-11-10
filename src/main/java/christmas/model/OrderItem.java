@@ -1,6 +1,7 @@
 package christmas.model;
 
 import christmas.constant.Menu;
+import christmas.constant.Price;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -25,5 +26,9 @@ public class OrderItem {
             orderPrice += menu.getPrice() * quantity;
         }
         return orderPrice;
+    }
+
+    public boolean priceOverEventPrice() {
+        return orderPrice >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
     }
 }

@@ -16,6 +16,7 @@ public class EventPlanner {
         outputView.outputDateBenefitsMessage(visitDate);
         outputView.outputOrderMenus(orderItem);
         outputView.outputOrderPrice(orderItem.getOrderPrice());
+        outputView.outputBonusMenu(orderItem.priceOverEventPrice());
     }
 
     private int getVisitDate() {
