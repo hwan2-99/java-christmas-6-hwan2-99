@@ -7,6 +7,7 @@ public enum OutputMessage {
     BONUS_MENU("<증정 메뉴>"),
     DISCOUNT_LIST("<혜택 내역>"),
     ALL_DISCOUNT_PRICE("<총혜택 금액>"),
+    EXPECTED_PRICE("<할인 후 예상 결제 금액>"),
     DAILY_DISCOUNT("크리스마스 디데이 할인: %s원"),
     WEEK_DAY_DISCOUNT("평일 할인: %s원"),
     WEEKEND_DISCOUNT("주말 할인: %s원"),

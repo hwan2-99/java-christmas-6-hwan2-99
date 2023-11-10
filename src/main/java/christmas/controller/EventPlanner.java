@@ -7,7 +7,6 @@ import christmas.model.OrderItem;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class EventPlanner {
     private final InputView inputView = new InputView();
@@ -17,7 +16,7 @@ public class EventPlanner {
         int visitDate = getVisitDate();
         OrderItem orderItem = new OrderItem(getOrderInfo());
         getOrderDetails(visitDate, orderItem);
-        getAllDiscount(initDiscount(visitDate, orderItem));
+        outputView.outputExpectedPrice(orderItem.getOrderPrice(), initDiscount(visitDate, orderItem));
     }
 
     private void getOrderDetails(int visitDate, OrderItem orderItem) {
@@ -35,14 +34,12 @@ public class EventPlanner {
         int weekDiscount = discount.weekDiscount(eventManager.isWeekDay(visitDate));
         int specialDiscount = discount.specialDiscount(eventManager.isSpecialDay(visitDate));
         int bonusMenuDiscount = discount.bonusMenuDiscount(orderItem.overEventPrice());
-
         outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount,
                 eventManager.isWeekDay(visitDate), bonusMenuDiscount);
-        return dailyDiscount + weekDiscount + specialDiscount + bonusMenuDiscount;
+        outputView.outputAllDiscountPrice(dailyDiscount + weekDiscount + specialDiscount + bonusMenuDiscount);
+        return dailyDiscount + weekDiscount + specialDiscount;
     }
-    private void getAllDiscount(int discount){
-        outputView.outputAllDiscountPrice(discount);
-    }
+
     private int getVisitDate() {
         return inputView.askVisitDate();
     }

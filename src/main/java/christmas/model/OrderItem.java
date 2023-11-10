@@ -18,6 +18,8 @@ public class OrderItem {
     }
 
     public int getOrderPrice() {
+        int orderPrice = Price.NONE.getPrice();
+
         for (Entry<String, Integer> entry : orderInfo.entrySet()) {
             String menuName = entry.getKey();
             int quantity = entry.getValue();
@@ -25,10 +27,11 @@ public class OrderItem {
 
             orderPrice += menu.getPrice() * quantity;
         }
+
         return orderPrice;
     }
 
     public boolean overEventPrice() {
-        return orderPrice >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
+        return getOrderPrice() >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
     }
 }
