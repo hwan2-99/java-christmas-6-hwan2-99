@@ -2,15 +2,11 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.constant.message.ErrorMessage;
-import christmas.model.OrderItem;
 import christmas.validator.OrderItemValidation;
 import christmas.validator.VisitDateValidation;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.print.DocFlavor.STRING;
 
 public class InputView {
     private static final String COMMA = ",";
@@ -49,15 +45,19 @@ public class InputView {
     }
 
     private Map<String, Integer> inputOrders() {
-        return Arrays.stream(Console.readLine().split(COMMA))
-                .map(orderItem -> orderItem.split(HYPHEN))
-                .filter(parts -> parts.length == 2)
-                .collect(Collectors.toMap(
-                        parts -> parts[0],
-                        parts -> Integer.parseInt(parts[1]),
-                        (existing, replacement) -> {
-                            throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
-                        }
-                ));
+        try {
+            return Arrays.stream(Console.readLine().split(COMMA))
+                    .map(orderItem -> orderItem.split(HYPHEN))
+                    .filter(parts -> parts.length == 2)
+                    .collect(Collectors.toMap(
+                            parts -> parts[0],
+                            parts -> Integer.parseInt(parts[1]),
+                            (existing, replacement) -> {
+                                throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
+                            }
+                    ));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
+        }
     }
 }

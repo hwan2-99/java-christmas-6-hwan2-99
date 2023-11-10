@@ -4,20 +4,22 @@ import christmas.constant.Date;
 import christmas.constant.message.ErrorMessage;
 
 public class VisitDateValidation {
-    public void validate(String inputValue){
+    public void validate(String inputValue) {
         validateIncorrectInput(inputValue);
         validateDateRange(inputValue);
     }
-    private void validateIncorrectInput(String inputValue){
+
+    private void validateIncorrectInput(String inputValue) {
         try {
             Integer.parseInt(inputValue);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.OVER_DATE_RANGE_ERROR.getMessage());
         }
     }
-    private void validateDateRange(String inputValue){
+
+    private void validateDateRange(String inputValue) {
         int date = Integer.parseInt(inputValue);
-        if(date < Date.FIRST_DAY.getDate() || date > Date.LAST_DAY.getDate()){
+        if (date < Date.FIRST_DAY.getDate() || date > Date.LAST_DAY.getDate()) {
             throw new IllegalArgumentException(ErrorMessage.OVER_DATE_RANGE_ERROR.getMessage());
         }
     }

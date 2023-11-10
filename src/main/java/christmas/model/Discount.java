@@ -10,7 +10,6 @@ public class Discount {
     private static final String MAIN = "main";
     private static final int MINUS = -1;
     private final OrderItem orderItem;
-    private int discountPrice;
 
     public Discount(OrderItem orderItem) {
         this.orderItem = orderItem;
