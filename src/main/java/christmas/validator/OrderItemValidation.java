@@ -28,7 +28,8 @@ public class OrderItemValidation {
             }
         }
     }
-    private void validateDuplicateName(Map<String, Integer> orderInfo){
+
+    private void validateDuplicateName(Map<String, Integer> orderInfo) {
         Set<String> uniqueNames = new HashSet<>();
         for (String orderName : orderInfo.keySet()) {
             if (!uniqueNames.add(orderName)) {
@@ -44,6 +45,7 @@ public class OrderItemValidation {
             }
         }
     }
+
     private void validateBlank(Map<String, Integer> orderInfo) {
         for (String orderName : orderInfo.keySet()) {
             if (orderName.trim().isEmpty()) {
