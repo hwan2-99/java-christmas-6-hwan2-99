@@ -16,7 +16,6 @@ public class EventPlanner {
         int visitDate = getVisitDate();
         OrderItem orderItem = new OrderItem(getOrderInfo());
         getOrderDetails(visitDate, orderItem);
-        outputView.outputExpectedPrice(orderItem.getOrderPrice(), initDiscount(visitDate, orderItem));
     }
 
     private void getOrderDetails(int visitDate, OrderItem orderItem) {
@@ -24,6 +23,7 @@ public class EventPlanner {
         outputView.outputOrderMenus(orderItem);
         outputView.outputOrderPrice(orderItem.getOrderPrice());
         outputView.outputBonusMenu(orderItem.overEventPrice());
+        outputView.outputExpectedPrice(orderItem.getOrderPrice(), initDiscount(visitDate, orderItem));
     }
 
     private int initDiscount(int visitDate, OrderItem orderItem) {
