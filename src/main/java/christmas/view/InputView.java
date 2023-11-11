@@ -35,8 +35,8 @@ public class InputView {
         System.out.println(ASK_ORDER_INFO);
         while (true) {
             try {
-                Map<String, Integer> orderInfo = inputOrders();
-                orderItemValidation.validate(orderInfo);
+                Map<String, Integer> orderInfo = separateOrders();
+                orderItemValidation.validateSeparatedOrders(orderInfo);
                 return orderInfo;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -44,9 +44,9 @@ public class InputView {
         }
     }
 
-    private Map<String, Integer> inputOrders() {
+    private Map<String, Integer> separateOrders() {
         try {
-            return Arrays.stream(Console.readLine().split(COMMA))
+            return Arrays.stream(inputOrders().split(COMMA))
                     .map(orderItem -> orderItem.split(HYPHEN))
                     .filter(parts -> parts.length == 2)
                     .collect(Collectors.toMap(
@@ -59,5 +59,10 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
         }
+    }
+    private String inputOrders(){
+        String inputValue = Console.readLine();
+        orderItemValidation.validateInputValue(inputValue);
+        return inputValue;
     }
 }

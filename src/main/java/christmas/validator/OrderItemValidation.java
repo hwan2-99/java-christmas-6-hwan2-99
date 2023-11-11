@@ -13,8 +13,7 @@ public class OrderItemValidation {
     private static final int MAX_QUANTITY = 20;
     private final List<String> menus = (List<String>) Arrays.stream(Menu.values()).map(Menu::getName).toList();
 
-    public void validate(Map<String, Integer> orderInfo) {
-        validateBlank(orderInfo);
+    public void validateSeparatedOrders(Map<String, Integer> orderInfo) {
         validateQuantity(orderInfo);
         validateMenuNames(orderInfo);
         validateMenuAllQuantity(orderInfo);
@@ -46,18 +45,22 @@ public class OrderItemValidation {
         }
     }
 
-    private void validateBlank(Map<String, Integer> orderInfo) {
-        for (String orderName : orderInfo.keySet()) {
-            if (orderName.trim().isEmpty()) {
-                throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
-            }
-        }
-    }
-
     private void validateMenuAllQuantity(Map<String, Integer> orderInfo) {
         int totalQuantity = orderInfo.values().stream().mapToInt(Integer::intValue).sum();
         if (totalQuantity > MAX_QUANTITY) {
             throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
         }
     }
+
+    public void validateInputValue(String inputValue){
+        validateBlank(inputValue);
+    }
+
+    private void validateBlank(String inputValue) {
+        if (inputValue.isBlank()) {
+            throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
+        }
+    }
+
+
 }
