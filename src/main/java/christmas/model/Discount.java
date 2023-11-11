@@ -25,7 +25,10 @@ public class Discount {
     }
 
     public int dailyDiscount(int price) {
-        return price * MINUS;
+        if (orderItem.isApply()) {
+            return price * MINUS;
+        }
+        return Price.NONE.getPrice();
     }
 
     private int discountByWeekType(String menuType) {
@@ -45,22 +48,31 @@ public class Discount {
     }
 
     public int weekDiscount(boolean isWeekDay) {
-        if (isWeekDay) {
-            return discountByWeekType(DESSERT);
+        if (orderItem.isApply()) {
+            if (isWeekDay) {
+                return discountByWeekType(DESSERT);
+            }
+            return discountByWeekType(MAIN);
         }
-        return discountByWeekType(MAIN);
+        return Price.NONE.getPrice();
     }
 
     public int specialDiscount(boolean isSpecialDay) {
-        if (isSpecialDay) {
-            return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
+        if (orderItem.isApply()) {
+            if (isSpecialDay) {
+                return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
+            }
+            return Price.NONE.getPrice();
         }
         return Price.NONE.getPrice();
     }
 
     public int bonusMenuDiscount(boolean isOverEventPrice) {
-        if (isOverEventPrice) {
-            return Menu.CHAMPAGNE.getPrice() * MINUS;
+        if (orderItem.isApply()) {
+            if (isOverEventPrice) {
+                return Menu.CHAMPAGNE.getPrice() * MINUS;
+            }
+            return Price.NONE.getPrice();
         }
         return Price.NONE.getPrice();
     }

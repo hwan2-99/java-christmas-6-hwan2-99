@@ -32,6 +32,7 @@ public class EventPlanner {
     private int initDiscount(int visitDate, OrderItem orderItem) {
         Discount discount = new Discount(orderItem,eventManager);
 
+        //todo eventManager discount객체내에 존재하니 visitDate만 넘겨줘도 구현되도록 변경
         int dailyDiscount = discount.dailyDiscount(eventManager.getCalender().get(visitDate));
         int weekDiscount = discount.weekDiscount(eventManager.isWeekDay(visitDate));
         int specialDiscount = discount.specialDiscount(eventManager.isSpecialDay(visitDate));

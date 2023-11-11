@@ -5,7 +5,8 @@ public enum Price {
     INITIAL_DISCOUNT_PRICE(1000),
     ADDITIONAL_DISCOUNT_PRICE(100),
     DAILY_DISCOUNT_PRICE(2023),
-    NONE(0);
+    NONE(0),
+    EVENT_APPLY_PRICE(10000);
     private final int price;
 
     Price(int price) {
