@@ -28,42 +28,27 @@ public class Discount {
         return price * MINUS;
     }
 
+    private int discountByWeekType(String menuType) {
+        int menuCount = 0;
+        Map<String, Integer> orderInfo = orderItem.getOrderInfo();
+
+        for (Entry<String, Integer> entry : orderInfo.entrySet()) {
+            String menuName = entry.getKey();
+            int quantity = entry.getValue();
+            Menu menu = Menu.getMenuByName(menuName);
+
+            if (menu.getType().equals(menuType)) {
+                menuCount += quantity;
+            }
+        }
+        return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
+    }
+
     public int weekDiscount(boolean isWeekDay) {
         if (isWeekDay) {
-            return weekDayEventDiscount();
+            return discountByWeekType(DESSERT);
         }
-        return weekendEventDiscount();
-    }
-
-    private int weekDayEventDiscount() {
-        int menuCount = 0;
-        Map<String, Integer> orderInfo = orderItem.getOrderInfo();
-
-        for (Entry<String, Integer> entry : orderInfo.entrySet()) {
-            String menuName = entry.getKey();
-            int quantity = entry.getValue();
-            Menu menu = Menu.getMenuByName(menuName);
-            if (menu.getType() == DESSERT) {
-                menuCount += quantity;
-            }
-        }
-        return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
-    }
-
-    private int weekendEventDiscount() {
-        int menuCount = 0;
-        Map<String, Integer> orderInfo = orderItem.getOrderInfo();
-
-        for (Entry<String, Integer> entry : orderInfo.entrySet()) {
-            String menuName = entry.getKey();
-            int quantity = entry.getValue();
-            Menu menu = Menu.getMenuByName(menuName);
-            if (menu.getType() == MAIN) {
-                menuCount += quantity;
-            }
-        }
-        System.out.println(menuCount);
-        return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
+        return discountByWeekType(MAIN);
     }
 
     public int specialDiscount(boolean isSpecialDay) {
