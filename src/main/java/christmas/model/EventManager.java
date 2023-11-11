@@ -41,4 +41,5 @@ public class EventManager {
 
         return dayOfWeek == DayOfWeek.SUNDAY || visitDate == CHRISTMAS_DAY;
     }
+
 }
