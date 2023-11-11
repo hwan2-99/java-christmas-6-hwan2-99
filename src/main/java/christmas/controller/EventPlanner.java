@@ -11,9 +11,11 @@ public class EventPlanner {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     private final EventManager eventManager;
+
     public EventPlanner() {
         this.eventManager = new EventManager();
     }
+
     public void run() {
         int visitDate = getVisitDate();
         OrderItem orderItem = new OrderItem(getOrderInfo());
@@ -30,7 +32,7 @@ public class EventPlanner {
     }
 
     private int initDiscount(int visitDate, OrderItem orderItem) {
-        Discount discount = new Discount(orderItem,eventManager);
+        Discount discount = new Discount(orderItem, eventManager);
 
         int dailyDiscount = discount.dailyDiscount(visitDate);
         int weekDiscount = discount.weekDiscount(visitDate);
@@ -45,7 +47,7 @@ public class EventPlanner {
     }
 
     private void getBadge(int visitDate, OrderItem orderItem) {
-        Discount discount = new Discount(orderItem,eventManager);
+        Discount discount = new Discount(orderItem, eventManager);
 
         outputView.outputEventBadge(discount.calculateDiscountPrice(visitDate));
     }

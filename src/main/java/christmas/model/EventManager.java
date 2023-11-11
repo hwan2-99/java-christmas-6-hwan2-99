@@ -1,5 +1,6 @@
 package christmas.model;
 
+import christmas.constant.Date;
 import christmas.constant.Price;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -9,18 +10,16 @@ import java.util.Map;
 public class EventManager {
     private static final int YEAR = 2023;
     private static final int DECEMBER = 12;
-    private static final int FIRST_DAY = 1;
-    private static final int LAST_DAY = 31;
     private static final int CHRISTMAS_DAY = 25;
     private final Map<Integer, Integer> calender = new HashMap<>();
 
 
     public EventManager() {
-        for (int i = FIRST_DAY; i <= CHRISTMAS_DAY; i++) {
+        for (int i = Date.FIRST_DAY.getDate(); i <= CHRISTMAS_DAY; i++) {
             calender.put(i,
-                    Price.INITIAL_DISCOUNT_PRICE.getPrice() + Price.ADDITIONAL_DISCOUNT_PRICE.getPrice() * (i - FIRST_DAY));
+                    Price.INITIAL_DISCOUNT_PRICE.getPrice() + Price.ADDITIONAL_DISCOUNT_PRICE.getPrice() * (i - Date.LAST_DAY.getDate()));
         }
-        for (int i = CHRISTMAS_DAY; i <= LAST_DAY; i++) {
+        for (int i = CHRISTMAS_DAY; i <= Date.LAST_DAY.getDate(); i++) {
             calender.put(i, Price.NONE.getPrice());
         }
     }

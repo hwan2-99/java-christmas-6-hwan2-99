@@ -60,7 +60,8 @@ public class InputView {
             throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
         }
     }
-    private String inputOrders(){
+
+    private String inputOrders() {
         String inputValue = Console.readLine();
         orderItemValidation.validateInputValue(inputValue);
         return inputValue;
