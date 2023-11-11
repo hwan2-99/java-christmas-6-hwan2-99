@@ -18,15 +18,15 @@ public class Discount {
     }
 
     public int calculateDiscountPrice(int visitDate) {
-        return dailyDiscount(eventManager.getCalender().get(visitDate)) +
-                weekDiscount(eventManager.isWeekDay(visitDate)) +
-                specialDiscount(eventManager.isSpecialDay(visitDate)) +
+        return dailyDiscount(visitDate) +
+                weekDiscount(visitDate) +
+                specialDiscount(visitDate) +
                 bonusMenuDiscount(orderItem.isOverEventPrice());
     }
 
-    public int dailyDiscount(int price) {
+    public int dailyDiscount(int visitDate) {
         if (orderItem.isApply()) {
-            return price * MINUS;
+            return eventManager.getCalender().get(visitDate) * MINUS;
         }
         return Price.NONE.getPrice();
     }
@@ -47,9 +47,9 @@ public class Discount {
         return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
     }
 
-    public int weekDiscount(boolean isWeekDay) {
+    public int weekDiscount(int visitDate) {
         if (orderItem.isApply()) {
-            if (isWeekDay) {
+            if (eventManager.isWeekDay(visitDate)) {
                 return discountByWeekType(DESSERT);
             }
             return discountByWeekType(MAIN);
@@ -57,9 +57,9 @@ public class Discount {
         return Price.NONE.getPrice();
     }
 
-    public int specialDiscount(boolean isSpecialDay) {
+    public int specialDiscount(int visitDate) {
         if (orderItem.isApply()) {
-            if (isSpecialDay) {
+            if (eventManager.isSpecialDay(visitDate)) {
                 return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
             }
             return Price.NONE.getPrice();
