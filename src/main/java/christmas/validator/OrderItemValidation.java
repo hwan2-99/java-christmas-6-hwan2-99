@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OrderItemValidation {
     private static final int MIN_QUANTITY = 1;
@@ -52,8 +53,9 @@ public class OrderItemValidation {
         }
     }
 
-    public void validateInputValue(String inputValue){
+    public void validateInputValue(String inputValue) {
         validateBlank(inputValue);
+        validateIncorrectInputValues(inputValue);
     }
 
     private void validateBlank(String inputValue) {
@@ -62,5 +64,18 @@ public class OrderItemValidation {
         }
     }
 
+    private void validateIncorrectInputValues(String inputValue) {
+        List<String> orders = Arrays.stream(inputValue.split(","))
+                .map(String::trim)
+                .toList();
+        for (String order : orders) {
+            List<String> orderDetails = Arrays.stream(order.split("-"))
+                    .map(String::trim)
+                    .toList();
 
+            if (orderDetails.size() != 2) {
+                throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
+            }
+        }
+    }
 }
