@@ -4,6 +4,7 @@ import christmas.constant.Menu;
 import christmas.constant.Price;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class OrderItem {
     private final Map<String, Integer> orderInfo;
@@ -31,10 +32,25 @@ public class OrderItem {
     }
 
     public boolean isOverEventPrice() {
-        return calculateOrderPrice() >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
+        if (isApply()) {
+            return calculateOrderPrice() >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
+        }
+        return false;
     }
 
     public boolean isApply() {
-        return calculateOrderPrice() >= Price.EVENT_APPLY_PRICE.getPrice();
+        return calculateOrderPrice() >= Price.EVENT_APPLY_PRICE.getPrice() && isOnlyBeverages();
+    }
+
+    public boolean isOnlyBeverages() {
+        Set<String> menuTypes = Set.of(Menu.WINE.getType());
+
+        for (String menuName : orderInfo.keySet()) {
+            Menu menu = Menu.getMenuByName(menuName);
+            if (!menuTypes.contains(menu.getType())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
