@@ -124,10 +124,10 @@ public class OutputView {
         if (badgeJudgement < Badge.STAR.getPrice()) {
             System.out.println(NONE);
         }
-        if (Badge.STAR.getPrice() < badgeJudgement && badgeJudgement < Badge.TREE.getPrice()) {
+        if (Badge.STAR.getPrice() <= badgeJudgement && badgeJudgement < Badge.TREE.getPrice()) {
             System.out.println(Badge.STAR.getName());
         }
-        if (Badge.TREE.getPrice() < badgeJudgement && badgeJudgement < Badge.SANTA.getPrice()) {
+        if (Badge.TREE.getPrice() <= badgeJudgement && badgeJudgement < Badge.SANTA.getPrice()) {
             System.out.println(Badge.TREE.getName());
         }
         if (Badge.SANTA.getPrice() <= badgeJudgement) {
