@@ -30,7 +30,7 @@ public class OrderItem {
         return orderPrice;
     }
 
-    public boolean overEventPrice() {
+    public boolean isOverEventPrice() {
         return calculateOrderPrice() >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
     }
 }

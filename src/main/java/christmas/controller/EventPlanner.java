@@ -1,6 +1,5 @@
 package christmas.controller;
 
-import christmas.constant.Price;
 import christmas.model.Discount;
 import christmas.model.EventManager;
 import christmas.model.OrderItem;
@@ -23,7 +22,7 @@ public class EventPlanner {
         outputView.outputDateBenefitsMessage(visitDate);
         outputView.outputOrderMenus(orderItem);
         outputView.outputOrderPrice(orderItem.calculateOrderPrice());
-        outputView.outputBonusMenu(orderItem.overEventPrice());
+        outputView.outputBonusMenu(orderItem.isOverEventPrice());
         outputView.outputExpectedPrice(orderItem.calculateOrderPrice(), initDiscount(visitDate, orderItem));
     }
 
@@ -34,7 +33,7 @@ public class EventPlanner {
         int dailyDiscount = discount.dailyDiscount(eventManager.getCalender().get(visitDate));
         int weekDiscount = discount.weekDiscount(eventManager.isWeekDay(visitDate));
         int specialDiscount = discount.specialDiscount(eventManager.isSpecialDay(visitDate));
-        int bonusMenuDiscount = discount.bonusMenuDiscount(orderItem.overEventPrice());
+        int bonusMenuDiscount = discount.bonusMenuDiscount(orderItem.isOverEventPrice());
 
         outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount,
                 eventManager.isWeekDay(visitDate), bonusMenuDiscount);

@@ -19,7 +19,7 @@ public class Discount {
 
         return dailyDiscount(eventManager.getCalender().get(visitDate)) + weekDiscount(
                 eventManager.isWeekDay(visitDate))
-                + specialDiscount(eventManager.isSpecialDay(visitDate)) + bonusMenuDiscount(orderItem.overEventPrice());
+                + specialDiscount(eventManager.isSpecialDay(visitDate)) + bonusMenuDiscount(orderItem.isOverEventPrice());
     }
 
     public int dailyDiscount(int price) {
