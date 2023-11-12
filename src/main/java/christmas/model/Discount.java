@@ -71,7 +71,7 @@ public class Discount {
 
     public int bonusMenuDiscount() {
         if (orderItem.isApply()) {
-            if (orderItem.isApply()) {
+            if (orderItem.isOverEventPrice()) {
                 return Menu.CHAMPAGNE.getPrice() * MINUS;
             }
             return Price.NONE.getPrice();
