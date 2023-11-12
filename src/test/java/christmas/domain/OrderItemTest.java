@@ -52,6 +52,16 @@ public class OrderItemTest {
         assertThat(orderItem.getOrderInfo().get("티본스테이크")).isEqualTo(2);
         assertThat(orderItem.getOrderInfo().get("레드와인")).isEqualTo(2);
     }
+    @DisplayName("주문 메뉴는 20개로 제한한다.")
+    @Test
+    void OrderItemOverMaxAmount() {
+        consoleInput("타파스-11,초코케이크-10", "티본스테이크-2,레드와인-2");
+        OrderItem orderItem = new OrderItem(inputView.askOrders());
+
+        assertThat(orderItem.getOrderInfo().get("티본스테이크")).isEqualTo(2);
+        assertThat(orderItem.getOrderInfo().get("레드와인")).isEqualTo(2);
+    }
+
     private void consoleInput(final String... args) {
         final byte[] buffer = String.join("\n", args).getBytes();
         System.setIn(new ByteArrayInputStream(buffer));
