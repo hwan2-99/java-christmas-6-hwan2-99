@@ -32,24 +32,24 @@ public class EventPlanner {
     }
 
     private int initDiscount(int visitDate, OrderItem orderItem) {
-        Discount discount = new Discount(orderItem, eventManager);
+        Discount discount = new Discount(visitDate, orderItem, eventManager);
 
-        int dailyDiscount = discount.dailyDiscount(visitDate);
-        int weekDiscount = discount.weekDiscount(visitDate);
-        int specialDiscount = discount.specialDiscount(visitDate);
+        int dailyDiscount = discount.dailyDiscount();
+        int weekDiscount = discount.weekDiscount();
+        int specialDiscount = discount.specialDiscount();
         int bonusMenuDiscount = discount.bonusMenuDiscount();
 
         outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount,
                 eventManager.isWeekDay(visitDate), bonusMenuDiscount);
-        outputView.outputAllDiscountPrice(discount.calculateDiscountPrice(visitDate));
+        outputView.outputAllDiscountPrice(discount.calculateDiscountPrice());
 
         return dailyDiscount + weekDiscount + specialDiscount;
     }
 
     private void getBadge(int visitDate, OrderItem orderItem) {
-        Discount discount = new Discount(orderItem, eventManager);
+        Discount discount = new Discount(visitDate, orderItem, eventManager);
 
-        outputView.outputEventBadge(discount.calculateDiscountPrice(visitDate));
+        outputView.outputEventBadge(discount.calculateDiscountPrice());
     }
 
     private int getVisitDate() {

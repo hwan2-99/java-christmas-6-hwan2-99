@@ -10,21 +10,23 @@ public class Discount {
     private static final String MAIN = "main";
     private static final int MINUS = -1;
     private final OrderItem orderItem;
+    private final int visitDate;
     private final EventManager eventManager;
 
-    public Discount(OrderItem orderItem, EventManager eventManager) {
+    public Discount(int visitDate, OrderItem orderItem, EventManager eventManager) {
         this.orderItem = orderItem;
+        this.visitDate = visitDate;
         this.eventManager = eventManager;
     }
 
-    public int calculateDiscountPrice(int visitDate) {
-        return dailyDiscount(visitDate) +
-                weekDiscount(visitDate) +
-                specialDiscount(visitDate) +
+    public int calculateDiscountPrice() {
+        return dailyDiscount() +
+                weekDiscount() +
+                specialDiscount() +
                 bonusMenuDiscount();
     }
 
-    public int dailyDiscount(int visitDate) {
+    public int dailyDiscount() {
         if (orderItem.isApply()) {
             return eventManager.getCalender().get(visitDate) * MINUS;
         }
@@ -47,7 +49,7 @@ public class Discount {
         return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
     }
 
-    public int weekDiscount(int visitDate) {
+    public int weekDiscount() {
         if (orderItem.isApply()) {
             if (eventManager.isWeekDay(visitDate)) {
                 return discountByWeekType(DESSERT);
@@ -57,7 +59,7 @@ public class Discount {
         return Price.NONE.getPrice();
     }
 
-    public int specialDiscount(int visitDate) {
+    public int specialDiscount() {
         if (orderItem.isApply()) {
             if (eventManager.isSpecialDay(visitDate)) {
                 return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
