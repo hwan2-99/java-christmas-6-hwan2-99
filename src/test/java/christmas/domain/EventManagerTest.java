@@ -24,4 +24,13 @@ public class EventManagerTest {
         boolean isWeekDay = eventManager.isWeekDay(visitDate);
         assertThat(isWeekDay).isTrue();
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {25, 17})
+    @DisplayName("크리스마스와 12월 17일은 특별할인 하는날이다")
+    void specialDayTest(int visitDate) {
+        EventManager eventManager = new EventManager();
+        boolean isSpecialDay = eventManager.isSpecialDay(visitDate);
+        assertThat(isSpecialDay).isTrue();
+    }
 }
