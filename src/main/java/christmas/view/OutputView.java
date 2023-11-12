@@ -4,6 +4,7 @@ import christmas.constant.Badge;
 import christmas.constant.Menu;
 import christmas.constant.Price;
 import christmas.constant.message.OutputMessage;
+import christmas.model.Discount;
 import christmas.model.OrderItem;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -43,17 +44,14 @@ public class OutputView {
         System.out.println(NONE);
     }
 
-    public void outputDiscountDetails(int dailyDiscount, int weekDiscount, int specialDiscount, boolean isWeekDay,
-                                      int bonusMenuDiscount) {
+    public void outputDiscountDetails(Discount discount, boolean isWeekDay) {
         System.out.println("\n" + OutputMessage.DISCOUNT_LIST.getMessage());
-        boolean hasDiscount = dailyDiscount != Price.NONE.getPrice() || weekDiscount != Price.NONE.getPrice()
-                || specialDiscount != Price.NONE.getPrice();
 
-        if (hasDiscount) {
-            outputDailyDiscount(dailyDiscount);
-            outputWeekDiscount(weekDiscount, isWeekDay);
-            outputSpecialDiscount(specialDiscount);
-            outputBonusMenuDiscount(bonusMenuDiscount);
+        if (discount.hasDiscount()) {
+            outputDailyDiscount(discount.dailyDiscount());
+            outputWeekDiscount(discount.weekDiscount(), isWeekDay);
+            outputSpecialDiscount(discount.specialDiscount());
+            outputBonusMenuDiscount(discount.bonusMenuDiscount());
             return;
         }
         outputNoneDiscount();

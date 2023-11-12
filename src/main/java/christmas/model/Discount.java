@@ -26,6 +26,12 @@ public class Discount {
                 bonusMenuDiscount();
     }
 
+    public int calculateApplyDiscount() {
+        return dailyDiscount() +
+                weekDiscount() +
+                specialDiscount();
+    }
+
     public int dailyDiscount() {
         if (orderItem.isApply()) {
             return eventManager.getCalender().get(visitDate) * MINUS;
@@ -77,5 +83,10 @@ public class Discount {
             return Price.NONE.getPrice();
         }
         return Price.NONE.getPrice();
+    }
+
+    public boolean hasDiscount() {
+        return dailyDiscount() != Price.NONE.getPrice() || weekDiscount() != Price.NONE.getPrice()
+                || specialDiscount() != Price.NONE.getPrice();
     }
 }
