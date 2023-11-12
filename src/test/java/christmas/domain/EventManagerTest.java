@@ -2,7 +2,9 @@ package christmas.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import christmas.model.EventManager;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -32,5 +34,16 @@ public class EventManagerTest {
         EventManager eventManager = new EventManager();
         boolean isSpecialDay = eventManager.isSpecialDay(visitDate);
         assertThat(isSpecialDay).isTrue();
+    }
+
+    @Test
+    @DisplayName("크리스마스 디데이 할인은 1일부터 25일까지만 적용되고 하루에 100원씩 늘어난다.")
+    void dailyDiscount(){
+        EventManager eventManager = new EventManager();
+        Map<Integer, Integer> calender = eventManager.getCalender();
+
+        assertThat(calender.get(3)).isEqualTo(1200);
+        assertThat(calender.get(25)).isEqualTo(3400);
+        assertThat(calender.get(26)).isEqualTo(0);
     }
 }
