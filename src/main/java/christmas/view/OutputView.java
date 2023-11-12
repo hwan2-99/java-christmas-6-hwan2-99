@@ -22,22 +22,27 @@ public class OutputView {
 
         System.out.println(message);
     }
+    public void outputOrderDetails(OrderItem orderItem){
+        outputOrderMenus(orderItem);
+        outputOrderPrice(orderItem);
+        outputBonusMenu(orderItem);
+    }
 
-    public void outputOrderMenus(OrderItem orderItem) {
+    private void outputOrderMenus(OrderItem orderItem) {
         System.out.println("\n" + OutputMessage.ORDER_LIST.getMessage());
         for (Entry<String, Integer> entry : orderItem.getOrderInfo().entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue() + COUNT);
         }
     }
 
-    public void outputOrderPrice(int orderPrice) {
+    private void outputOrderPrice(OrderItem orderItem) {
         System.out.println("\n" + OutputMessage.ORDER_PRICE_BEFORE_DISCOUNT.getMessage());
-        System.out.println(numberFormat.format(orderPrice) + WON);
+        System.out.println(numberFormat.format(orderItem.calculateOrderPrice()) + WON);
     }
 
-    public void outputBonusMenu(boolean overEventPrice) {
+    private void outputBonusMenu(OrderItem orderItem) {
         System.out.println("\n" + OutputMessage.BONUS_MENU.getMessage());
-        if (overEventPrice) {
+        if (orderItem.isOverEventPrice()) {
             System.out.println(Menu.CHAMPAGNE.getName() + " " + BONUS_COUNT + COUNT);
             return;
         }

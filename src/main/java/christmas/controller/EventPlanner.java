@@ -18,16 +18,19 @@ public class EventPlanner {
 
     public void run() {
         int visitDate = getVisitDate();
-        OrderItem orderItem = new OrderItem(getOrderInfo());
-        getOrderDetails(visitDate, orderItem);
+        OrderItem orderItem = getOrderDetails(visitDate);
+        getEventDetails(visitDate, orderItem);
         getBadge(visitDate, orderItem);
     }
 
-    private void getOrderDetails(int visitDate, OrderItem orderItem) {
+    private OrderItem getOrderDetails(int visitDate) {
+        OrderItem orderItem = new OrderItem(getOrderInfo());
         outputView.outputDateBenefitsMessage(visitDate);
-        outputView.outputOrderMenus(orderItem);
-        outputView.outputOrderPrice(orderItem.calculateOrderPrice());
-        outputView.outputBonusMenu(orderItem.isOverEventPrice());
+        outputView.outputOrderDetails(orderItem);
+        return orderItem;
+    }
+
+    private void getEventDetails(int visitDate, OrderItem orderItem) {
         outputView.outputExpectedPrice(orderItem.calculateOrderPrice(), initDiscount(visitDate, orderItem));
     }
 
