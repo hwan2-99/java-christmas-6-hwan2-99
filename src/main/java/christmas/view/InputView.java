@@ -31,7 +31,7 @@ public class InputView {
         }
     }
 
-    public Map<String, Integer> askOrderMenus() {
+    public Map<String, Integer> askOrders() {
         System.out.println(ASK_ORDER_INFO);
         while (true) {
             try {

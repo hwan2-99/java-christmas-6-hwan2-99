@@ -57,7 +57,7 @@ public class EventPlanner {
     }
 
     private Map<String, Integer> getOrderInfo() {
-        return inputView.askOrderMenus();
+        return inputView.askOrders();
     }
 
 }
