@@ -37,7 +37,7 @@ public class EventPlanner {
         int dailyDiscount = discount.dailyDiscount(visitDate);
         int weekDiscount = discount.weekDiscount(visitDate);
         int specialDiscount = discount.specialDiscount(visitDate);
-        int bonusMenuDiscount = discount.bonusMenuDiscount(orderItem.isOverEventPrice());
+        int bonusMenuDiscount = discount.bonusMenuDiscount();
 
         outputView.outputDiscountDetails(dailyDiscount, weekDiscount, specialDiscount,
                 eventManager.isWeekDay(visitDate), bonusMenuDiscount);

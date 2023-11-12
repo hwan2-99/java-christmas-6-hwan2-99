@@ -21,7 +21,7 @@ public class Discount {
         return dailyDiscount(visitDate) +
                 weekDiscount(visitDate) +
                 specialDiscount(visitDate) +
-                bonusMenuDiscount(orderItem.isOverEventPrice());
+                bonusMenuDiscount();
     }
 
     public int dailyDiscount(int visitDate) {
@@ -67,9 +67,9 @@ public class Discount {
         return Price.NONE.getPrice();
     }
 
-    public int bonusMenuDiscount(boolean isOverEventPrice) {
+    public int bonusMenuDiscount() {
         if (orderItem.isApply()) {
-            if (isOverEventPrice) {
+            if (orderItem.isApply()) {
                 return Menu.CHAMPAGNE.getPrice() * MINUS;
             }
             return Price.NONE.getPrice();
