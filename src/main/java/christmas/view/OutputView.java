@@ -22,7 +22,8 @@ public class OutputView {
 
         System.out.println(message);
     }
-    public void outputOrderDetails(OrderItem orderItem){
+
+    public void outputOrderDetails(OrderItem orderItem) {
         outputOrderMenus(orderItem);
         outputOrderPrice(orderItem);
         outputBonusMenu(orderItem);
@@ -116,9 +117,9 @@ public class OutputView {
         System.out.println(numberFormat.format(discount.calculateDiscountPrice()) + WON);
     }
 
-    public void outputExpectedPrice(int price, int discount) {
+    public void outputExpectedPrice(int price) {
         System.out.println("\n" + OutputMessage.EXPECTED_PRICE.getMessage());
-        System.out.println(numberFormat.format(price + discount) + WON);
+        System.out.println(numberFormat.format(price) + WON);
     }
 
     public void outputEventBadge(int price) {
