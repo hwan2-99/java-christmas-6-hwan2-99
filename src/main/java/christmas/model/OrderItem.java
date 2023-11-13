@@ -39,10 +39,10 @@ public class OrderItem {
     }
 
     public boolean isApply() {
-        return calculateOrderPrice() >= Price.EVENT_APPLY_PRICE.getPrice() && isOnlyBeverages();
+        return calculateOrderPrice() >= Price.EVENT_APPLY_PRICE.getPrice() && isNotOnlyBeverages();
     }
 
-    public boolean isOnlyBeverages() {
+    public boolean isNotOnlyBeverages() {
         Set<String> menuTypes = Set.of(Menu.WINE.getType());
 
         for (String menuName : orderInfo.keySet()) {
