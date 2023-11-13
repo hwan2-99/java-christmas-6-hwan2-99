@@ -15,7 +15,7 @@ public class OutputView {
     private static final String COUNT = "개";
     private static final String NONE = "없음";
     private static final String WON = "원";
-    NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+    private final NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 
     public void outputDateBenefitsMessage(int visitDate) {
         String message = String.format(OutputMessage.PRINT_EVENT_BENEFITS.getMessage(), visitDate);
