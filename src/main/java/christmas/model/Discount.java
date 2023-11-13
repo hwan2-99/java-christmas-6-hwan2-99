@@ -66,21 +66,15 @@ public class Discount {
     }
 
     public int specialDiscount() {
-        if (orderItem.isApply()) {
-            if (eventManager.isSpecialDay(visitDate)) {
-                return Price.INITIAL_DISCOUNT.getPrice() * MINUS;
-            }
-            return Price.NONE.getPrice();
+        if (orderItem.isApply() && eventManager.isSpecialDay(visitDate)) {
+            return Price.INITIAL_DISCOUNT.getPrice() * MINUS;
         }
         return Price.NONE.getPrice();
     }
 
     public int bonusMenuDiscount() {
-        if (orderItem.isApply()) {
-            if (orderItem.isOverEventPrice()) {
-                return Menu.CHAMPAGNE.getPrice() * MINUS;
-            }
-            return Price.NONE.getPrice();
+        if (orderItem.isApply() && orderItem.isOverEventPrice()) {
+            return Menu.CHAMPAGNE.getPrice() * MINUS;
         }
         return Price.NONE.getPrice();
     }

@@ -31,10 +31,10 @@ public class EventPlanner {
     }
 
     private void getExpectedPrice(int visitDate, OrderItem orderItem) {
-        outputView.outputExpectedPrice(initDiscount(visitDate, orderItem));
+        outputView.outputExpectedPrice(getDiscountDetail(visitDate, orderItem));
     }
 
-    private int initDiscount(int visitDate, OrderItem orderItem) {
+    private int getDiscountDetail(int visitDate, OrderItem orderItem) {
         Discount discount = new Discount(visitDate, orderItem, eventManager);
 
         outputView.outputDiscountDetails(discount, eventManager.isWeekDay(visitDate));
