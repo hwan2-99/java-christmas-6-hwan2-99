@@ -38,7 +38,7 @@ public class EventPlanner {
         Discount discount = new Discount(visitDate, orderItem, eventManager);
 
         outputView.outputDiscountDetails(discount, eventManager.isWeekDay(visitDate));
-        outputView.outputAllDiscountPrice(discount.calculateDiscountPrice());
+        outputView.outputAllDiscountPrice(discount);
 
         return discount.calculateApplyDiscount();
     }

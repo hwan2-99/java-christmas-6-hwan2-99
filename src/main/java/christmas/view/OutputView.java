@@ -111,9 +111,9 @@ public class OutputView {
         System.out.println(NONE);
     }
 
-    public void outputAllDiscountPrice(int discount) {
+    public void outputAllDiscountPrice(Discount discount) {
         System.out.println("\n" + OutputMessage.ALL_DISCOUNT_PRICE.getMessage());
-        System.out.println(numberFormat.format(discount) + WON);
+        System.out.println(numberFormat.format(discount.calculateDiscountPrice()) + WON);
     }
 
     public void outputExpectedPrice(int price, int discount) {
