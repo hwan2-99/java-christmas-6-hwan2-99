@@ -52,7 +52,7 @@ public class Discount {
                 menuCount += quantity;
             }
         }
-        return menuCount * Price.DAILY_DISCOUNT_PRICE.getPrice() * MINUS;
+        return menuCount * Price.DAILY_DISCOUNT.getPrice() * MINUS;
     }
 
     public int weekDiscount() {
@@ -68,7 +68,7 @@ public class Discount {
     public int specialDiscount() {
         if (orderItem.isApply()) {
             if (eventManager.isSpecialDay(visitDate)) {
-                return Price.INITIAL_DISCOUNT_PRICE.getPrice() * MINUS;
+                return Price.INITIAL_DISCOUNT.getPrice() * MINUS;
             }
             return Price.NONE.getPrice();
         }
