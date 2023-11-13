@@ -1,4 +1,5 @@
 package christmas.domain;
+
 import static org.assertj.core.api.Assertions.*;
 
 import christmas.model.EventManager;
@@ -38,7 +39,7 @@ public class EventManagerTest {
 
     @Test
     @DisplayName("크리스마스 디데이 할인은 1일부터 25일까지만 적용되고 하루에 100원씩 늘어난다.")
-    void dailyDiscount(){
+    void dailyDiscount() {
         EventManager eventManager = new EventManager();
         Map<Integer, Integer> calender = eventManager.getCalender();
 

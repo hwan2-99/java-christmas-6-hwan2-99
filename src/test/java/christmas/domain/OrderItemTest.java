@@ -34,6 +34,7 @@ public class OrderItemTest {
         assertThat(orderItem.getOrderInfo().get("타파스")).isEqualTo(1);
         assertThat(orderItem.getOrderInfo().get("초코케이크")).isEqualTo(3);
     }
+
     @DisplayName("정해진 양식을 제대로 입력하지 않으면 재입력을 한다")
     @Test
     void incorrectOrderItem() {
@@ -43,6 +44,7 @@ public class OrderItemTest {
         assertThat(orderItem.getOrderInfo().get("티본스테이크")).isEqualTo(2);
         assertThat(orderItem.getOrderInfo().get("레드와인")).isEqualTo(2);
     }
+
     @DisplayName("메뉴사이에 공백이 있으면 재입력을 한다")
     @Test
     void blankWithOrderItem() {
@@ -52,6 +54,7 @@ public class OrderItemTest {
         assertThat(orderItem.getOrderInfo().get("티본스테이크")).isEqualTo(2);
         assertThat(orderItem.getOrderInfo().get("레드와인")).isEqualTo(2);
     }
+
     @DisplayName("주문 메뉴는 20개로 제한한다.")
     @Test
     void OrderItemOverMaxAmount() {
@@ -61,6 +64,7 @@ public class OrderItemTest {
         assertThat(orderItem.getOrderInfo().get("티본스테이크")).isEqualTo(2);
         assertThat(orderItem.getOrderInfo().get("레드와인")).isEqualTo(2);
     }
+
     @DisplayName("메뉴 이름이 중복되게 주문할 수 없다.")
     @Test
     void OrderItemDuplicate() {
@@ -70,6 +74,7 @@ public class OrderItemTest {
         assertThat(orderItem.getOrderInfo().get("티본스테이크")).isEqualTo(2);
         assertThat(orderItem.getOrderInfo().get("레드와인")).isEqualTo(2);
     }
+
     @DisplayName("메뉴 등록이 안된 메뉴는 주문할 수 없다")
     @Test
     void OrderItemNoNames() {
@@ -79,6 +84,7 @@ public class OrderItemTest {
         assertThat(orderItem.getOrderInfo().get("티본스테이크")).isEqualTo(2);
         assertThat(orderItem.getOrderInfo().get("레드와인")).isEqualTo(2);
     }
+
     private void consoleInput(final String... args) {
         final byte[] buffer = String.join("\n", args).getBytes();
         System.setIn(new ByteArrayInputStream(buffer));
