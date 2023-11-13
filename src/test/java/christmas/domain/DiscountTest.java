@@ -79,6 +79,16 @@ public class DiscountTest {
         assertThat(discount.weekDiscount()).isEqualTo(0);
         assertThat(discount.calculateDiscountPrice()).isEqualTo(0);
     }
+    @ParameterizedTest
+    @DisplayName("할인전 주문 금액이 120000원 이상일 경우 증정메뉴인 샴페인을 준다.")
+    @ValueSource(ints = 4)
+    void overEventPrice(int visitDate){
+        consoleInput("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+        OrderItem orderItem = new OrderItem(inputView.askOrders());
+        Discount discount = new Discount(visitDate,orderItem,eventManager);
+
+        assertThat(discount.bonusMenuDiscount()).isEqualTo(-25000);
+    }
 
     private void consoleInput(final String... args) {
         final byte[] buffer = String.join("\n", args).getBytes();
