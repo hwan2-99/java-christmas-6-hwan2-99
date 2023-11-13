@@ -48,7 +48,7 @@ public class OrderItemTest {
     @DisplayName("메뉴사이에 공백이 있으면 재입력을 한다")
     @Test
     void blankWithOrderItem() {
-        consoleInput("타파스-1, ,초코케이크-ㅁ", "티본스테이크-2,레드와인-2");
+        consoleInput("타파스-1, ,초코케이크-2", "티본스테이크-2,레드와인-2");
         OrderItem orderItem = new OrderItem(inputView.askOrders());
 
         assertThat(orderItem.getOrderInfo().get("티본스테이크")).isEqualTo(2);
