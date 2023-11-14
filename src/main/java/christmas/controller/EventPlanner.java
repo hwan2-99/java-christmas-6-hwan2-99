@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.model.Discount;
+import christmas.model.EventBadge;
 import christmas.model.EventManager;
 import christmas.model.OrderItem;
 import christmas.view.InputView;
@@ -19,8 +20,9 @@ public class EventPlanner {
     public void run() {
         int visitDate = getVisitDate();
         OrderItem orderItem = getOrderDetails(visitDate);
-        getExpectedPrice(visitDate, orderItem);
-        getBadge(visitDate, orderItem);
+        Discount discount = getDiscountDetail(visitDate, orderItem);
+        getExpectedPrice(discount, orderItem);
+        getBadge(discount);
     }
 
     private OrderItem getOrderDetails(int visitDate) {
@@ -30,23 +32,21 @@ public class EventPlanner {
         return orderItem;
     }
 
-    private void getExpectedPrice(int visitDate, OrderItem orderItem) {
-        outputView.outputExpectedPrice(getDiscountDetail(visitDate, orderItem));
+    private void getExpectedPrice(Discount discount, OrderItem orderItem) {
+        outputView.outputExpectedPrice(orderItem.calculateOrderPrice() + discount.calculateApplyDiscount());
     }
 
-    private int getDiscountDetail(int visitDate, OrderItem orderItem) {
+    private Discount getDiscountDetail(int visitDate, OrderItem orderItem) {
         Discount discount = new Discount(visitDate, orderItem, eventManager);
-
         outputView.outputDiscountDetails(discount, eventManager.isWeekDay(visitDate));
         outputView.outputAllDiscountPrice(discount);
 
-        return orderItem.calculateOrderPrice() + discount.calculateApplyDiscount();
+        return discount;
     }
 
-    private void getBadge(int visitDate, OrderItem orderItem) {
-        Discount discount = new Discount(visitDate, orderItem, eventManager);
-
-        outputView.outputEventBadge(discount.calculateDiscountPrice());
+    private void getBadge(Discount discount) {
+        EventBadge eventBadge = new EventBadge(discount);
+        outputView.outputEventBadge(eventBadge);
     }
 
     private int getVisitDate() {
