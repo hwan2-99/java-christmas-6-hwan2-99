@@ -32,10 +32,7 @@ public class OrderItem {
     }
 
     public boolean isOverEventPrice() {
-        if (isApply()) {
-            return calculateOrderPrice() >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
-        }
-        return false;
+        return isApply() && calculateOrderPrice() >= Price.CHECK_CHAMPAGNE_GIVE.getPrice();
     }
 
     public boolean isApply() {
