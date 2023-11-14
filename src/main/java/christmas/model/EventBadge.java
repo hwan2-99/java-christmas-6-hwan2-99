@@ -5,7 +5,6 @@ import christmas.constant.Badge;
 public class EventBadge {
     private static final String NONE = "없음";
     private final Discount discount;
-    private String badgeName;
 
     public EventBadge(Discount discount) {
         this.discount = discount;
@@ -17,13 +16,13 @@ public class EventBadge {
 
     private String judgementBadge() {
         if (isStar()) {
-            return badgeName = Badge.STAR.getName();
+            return Badge.STAR.getName();
         }
         if (isTree()) {
-            return badgeName = Badge.TREE.getName();
+            return Badge.TREE.getName();
         }
         if (isSanta()) {
-            return badgeName = Badge.SANTA.getName();
+            return Badge.SANTA.getName();
         }
         return NONE;
     }
