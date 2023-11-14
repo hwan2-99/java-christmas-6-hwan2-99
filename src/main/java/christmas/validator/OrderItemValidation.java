@@ -24,6 +24,7 @@ public class OrderItemValidation {
         validateDuplicateName(orderInfo);
         return orderInfo;
     }
+
     private Map<String, Integer> separateOrders(String inputValue) {
         try {
             return Arrays.stream(inputValue.split(COMMA)).map(orderItem -> orderItem.split(HYPHEN))
@@ -37,6 +38,7 @@ public class OrderItemValidation {
             throw new IllegalArgumentException(ErrorMessage.INCORRECT_ORDER_ERROR.getMessage());
         }
     }
+
     private void validateQuantity(Map<String, Integer> orderInfo) {
         for (int quantity : orderInfo.values()) {
             if (quantity < MIN_QUANTITY) {
