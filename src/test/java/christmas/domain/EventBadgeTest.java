@@ -42,6 +42,7 @@ public class EventBadgeTest {
 
         assertThat(eventBadge.getBadgeName()).isEqualTo("산타");
     }
+
     @ParameterizedTest
     @DisplayName("총 혜택금액이 10000원 이상 30000원 미만일 경우 트리뱃지를 받는다")
     @ValueSource(ints = 3)
@@ -65,6 +66,7 @@ public class EventBadgeTest {
 
         assertThat(eventBadge.getBadgeName()).isEqualTo("별");
     }
+
     @ParameterizedTest
     @DisplayName("총 혜택금액이 5000원 미만일 경우 뱃지는 받지못한다")
     @ValueSource(ints = 3)
@@ -76,6 +78,7 @@ public class EventBadgeTest {
 
         assertThat(eventBadge.getBadgeName()).isEqualTo("없음");
     }
+
     private void consoleInput(final String... args) {
         final byte[] buffer = String.join("\n", args).getBytes();
         System.setIn(new ByteArrayInputStream(buffer));
